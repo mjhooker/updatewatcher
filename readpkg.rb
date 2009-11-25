@@ -126,19 +126,4 @@ end
 
 
 
-puts avail["update-manager-core"]
 
-__END__
-
-
-foreach $i (keys %config)
-{
-  if (exists $latestp{$i})
-  {
-    if ($latestp{$i} ne $config{$i}{"version"})
-    {
-        print $i.chr(9).$config{$i}{"version"}."\n";
-        print "has been replaced with ".$latestp{$i}."\n";
-    }
-  }
-}

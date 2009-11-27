@@ -1,5 +1,9 @@
 #!/usr/bin/ruby
 
+require 'net/http'
+require 'uri'
+
+
 pkgfile=File.open("packages")
 
 readpkg=0
@@ -57,6 +61,21 @@ ipline=pkgfile.readline
 
 
      myconfig[c_package]=[c_package,c_state,c_version,c_descr]
+
+
+url = URI.parse('http://127.0.0.1:3000/packages.xml')
+params = {
+  'package[cid]' => 1,
+  'package[package]' => c_package,
+  'package[version]' => c_version,
+  'package[state]' => c_state
+}
+
+resp = Net::HTTP.post_form(url, params)
+
+resp_text = resp.body
+
+puts resp_text
 
 #     puts myconfig[c_package]
 

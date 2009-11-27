@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cid: 1
+  package: MyString
+  version: MyString
+  state: MyString
+
+two:
+  cid: 1
+  package: MyString
+  version: MyString
+  state: MyString

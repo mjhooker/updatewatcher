@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cid: 1
+  cname: MyString
+  oid: 1
+  did: 1
+
+two:
+  cid: 1
+  cname: MyString
+  oid: 1
+  did: 1

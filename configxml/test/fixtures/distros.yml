@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  did: 1
+  dname: MyString
+
+two:
+  did: 1
+  dname: MyString

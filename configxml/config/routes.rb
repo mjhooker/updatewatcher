@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :owners, :has_many => :computers
+
+  map.resources :distros
+
+  map.resources :computers, :has_many => :packages
+
   map.resources :packages
 
   # The priority is based upon order of creation: first created -> highest priority.

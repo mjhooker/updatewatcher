@@ -9,7 +9,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091117012951) do
+ActiveRecord::Schema.define(:version => 20091204011110) do
+
+  create_table "computers", :force => true do |t|
+    t.integer  "cid"
+    t.string   "cname"
+    t.integer  "oid"
+    t.integer  "did"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "owner_id"
+  end
+
+  create_table "distros", :force => true do |t|
+    t.integer  "did"
+    t.string   "dname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "owners", :force => true do |t|
+    t.integer  "oid"
+    t.string   "oname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "packages", :force => true do |t|
     t.integer  "cid"
@@ -18,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20091117012951) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "computer_id"
   end
 
 end

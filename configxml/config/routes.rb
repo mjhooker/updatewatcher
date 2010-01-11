@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :distropackages
+
   map.resources :owners, :has_many => :computers
 
   map.resources :distros

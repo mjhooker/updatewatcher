@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091204011110) do
+ActiveRecord::Schema.define(:version => 20100111004645) do
 
   create_table "computers", :force => true do |t|
     t.integer  "cid"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(:version => 20091204011110) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
+  end
+
+  create_table "distropackages", :force => true do |t|
+    t.integer  "pid"
+    t.string   "package"
+    t.string   "version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "distros", :force => true do |t|

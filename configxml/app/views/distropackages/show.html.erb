@@ -1,0 +1,18 @@
+<p>
+  <b>Pid:</b>
+  <%=h @distropackage.pid %>
+</p>
+
+<p>
+  <b>Package:</b>
+  <%=h @distropackage.package %>
+</p>
+
+<p>
+  <b>Version:</b>
+  <%=h @distropackage.version %>
+</p>
+
+
+<%= link_to 'Edit', edit_distropackage_path(@distropackage) %> |
+<%= link_to 'Back', distropackages_path %>

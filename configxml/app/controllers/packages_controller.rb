@@ -2,7 +2,11 @@ class PackagesController < ApplicationController
   # GET /packages
   # GET /packages.xml
   def index
-    @packages = Package.find(:all)
+    if params.has_key?(:package)
+    	@packages = Package.find(:all, :conditions => [ "package = ?", params[:package] ])
+    else
+    	@packages = Package.find(:all)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

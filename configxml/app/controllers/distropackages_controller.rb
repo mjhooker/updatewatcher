@@ -2,7 +2,11 @@ class DistropackagesController < ApplicationController
   # GET /distropackages
   # GET /distropackages.xml
   def index
-    @distropackages = Distropackage.find(:all)
+    if params.has_key?(:package)
+    	@packages = Distropackage.find(:all, :conditions => [ "package = ?", params[:package] ])
+    else
+    	@packages = Distropackage.find(:all)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

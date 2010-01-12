@@ -75,7 +75,11 @@ resp = Net::HTTP.post_form(url, params)
 
 resp_text = resp.body
 
-puts resp_text
+# puts resp_text
+
+puts c_package
+puts ' i\n'
+
 
 #     puts myconfig[c_package]
 
@@ -112,6 +116,18 @@ ipline=pkgfile.readline
 #    puts foundpackage
 #    puts foundversion
     avail[foundpackage]=foundversion
+
+url = URI.parse('http://127.0.0.1:3000/distropackages.xml')
+params = {
+  'package[cid]' => 1,
+  'package[package]' => foundpackage,
+  'package[version]' => foundversion,
+}
+
+resp = Net::HTTP.post_form(url, params)
+puts c_package
+puts ' r\n'
+
 #    puts avail[foundpackage]
   end
 

@@ -70,8 +70,8 @@ foreach $i (keys %config)
   {
     if ($latestp{$i} ne $config{$i}{"version"})
     {
-        print $i.chr(9).$config{$i}{"version"}."\n";
-        print "has been replaced with ".$latestp{$i}."\n";
+        print $i.chr(9).$config{$i}{"version"}." -> ";
+        print $latestp{$i}."\n";
     }
   }
 }

@@ -36,9 +36,21 @@ while ($ipline=<A>)
     $foundversion=substr($ipline,length($want)+2,-1);
 #    print "Package [".$foundpackage."]\n";
 #    print $want." [".$foundversion."]\n";
-    $latestp{$foundpackage}=$foundversion;
+    if (exists $latestp{$foundpackage})
+    {
+      if ($latestp{$foundpackage} ne $foundversion)
+      {
+        $compare=system("dpkg --compare-versions ".$latestp{$foundpackage}." lt ".$foundversion);
+        if ($compare==0)
+        {
+#          print "replacing ".$latestp{$foundpackage}." with ".$foundversion."\n";
+          $latestp{$foundpackage}=$foundversion;
+        }
+      }
+    } else {
+        $latestp{$foundpackage}=$foundversion;
+    }
   }
-
 
 }
 

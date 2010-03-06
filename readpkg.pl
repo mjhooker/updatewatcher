@@ -62,7 +62,7 @@ foreach $i (keys %config)
   {
     if ($latestp{$i} ne $config{$i}{"version"})
     {
-        print $i.chr(9).$config{$i}{"version"}." -> ";
+        print $i.chr(9).$config{$i}{"version"}." != ";
         print $latestp{$i}."\n";
     }
   }

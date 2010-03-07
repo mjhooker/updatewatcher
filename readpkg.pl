@@ -18,6 +18,7 @@ while ($ipline=<P>)
 
 close P;
 
+print "computing updates\n";
 open A,"cat `cat allpackagefiles` |";
 
 while ($ipline=<A>)

@@ -19,7 +19,7 @@ fi
 
 echo archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages >> allpackagefiles
 
-    echo $j $i
+    echo updated $j $i
    done
  done
 

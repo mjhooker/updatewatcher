@@ -2,7 +2,7 @@
 
 OPT=-nv
 
-rm allpackages
+rm allpackagefiles
 
 for i in jaunty jaunty-security jaunty-updates 
  do
@@ -11,8 +11,13 @@ for i in jaunty jaunty-security jaunty-updates
 
 
 wget $OPT -m http://archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages.bz2 
-bzip2 -d < archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages.bz2 > archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages
-cat archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages >> allpackages
+if [ archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages -nt archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages ]
+then
+ echo unzippping
+ bzip2 -d < archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages.bz2 > archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages
+fi
+
+echo archive.ubuntu.com/ubuntu/dists/${i}/${j}/binary-i386/Packages >> allpackagefiles
 
     echo $j $i
    done

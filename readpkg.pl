@@ -18,7 +18,7 @@ while ($ipline=<P>)
 
 close P;
 
-open A,"< allpackages";
+open A,"cat `cat allpackagefiles` |";
 
 while ($ipline=<A>)
 {

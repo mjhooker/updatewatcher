@@ -5,5 +5,7 @@
 # *.[oa]
 *~
 packages
-allpackages
+allpackagefiles
 archive.ubuntu.com
+system.inf
+packages.gz

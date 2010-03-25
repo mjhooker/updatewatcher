@@ -5,15 +5,22 @@ echo checking installed packages
 dpkg-query -W -f '${Status;1}\t${Package}\t${Version}\n' | grep -v "^d" > packages
 gzip < packages > packages.gz
 
-if [ -e packages.gz.md5 ]
+if [ -e packages.md5 ]
 then
- if [ `md5sum --status -c packages.gz.md5` ]
+
+ OLD=`cat packages.md5`
+ NEW=`md5sum packages`
+
+ if [[ ! ${NEW} == ${OLD} ]]
  then
   echo installed packages updated
   cp allpackagefiles newpackagefiles
+ else
+  echo no change to installed packages
  fi
 else
  cp allpackagefiles newpackagefiles
+ echo checking all available packages
 fi
 
 if [ ! -e system.inf ]
@@ -22,4 +29,4 @@ then
  uuidgen > system.inf
 fi
 
-md5sum packages.gz > packages.gz.md5
+md5sum packages > packages.md5

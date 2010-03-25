@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 open P,"< packages";
-open E,"> existingpackages";
+#open E,"> existingpackages";
 
 while ($ipline=<P>)
 {
@@ -15,12 +15,13 @@ while ($ipline=<P>)
     $config{$package}{"version"}=$version;
     $config{$package}{"descr"}=$descr;
 
-    print E "Package: ".$package."\n";
-    print E "Version: ".$version."\n\n";
+#    print E "Package: ".$package."\n";
+#    print E "Version: ".$version."\n\n";
 }
 
-close E;
+#close E;
 close P;
+
 
 print "computing updates\n";
 open A,"cat `cat newpackagefiles` |";
@@ -61,6 +62,9 @@ while ($ipline=<A>)
 
 close A;
 
+open E,"> updatedpackages";
+
+
 foreach $i (keys %config)
 {
   if (exists $latestp{$i})
@@ -69,6 +73,11 @@ foreach $i (keys %config)
     {
         print $i.chr(9).$config{$i}{"version"}." != ";
         print $latestp{$i}."\n";
+    print E "Package: ".$i."\n";
+    print E "Version: ".$latestp{$i}."\n\n";
+
     }
   }
 }
+
+close E;

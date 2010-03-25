@@ -5,12 +5,16 @@ HOST=archive.ubuntu.com
 
 
 rm allpackagefiles
-echo existingpackages > newpackagefiles
+touch updatedpackages
+echo updatedpackages > newpackagefiles
 
 for i in jaunty jaunty-security jaunty-updates 
  do
   for j in main multiverse universe restricted 
    do
+
+    echo check for updated $j $i
+
 
     LOC=${HOST}/ubuntu/dists/${i}/${j}/binary-i386/Packages
 wget $OPT -m http://${LOC}.bz2 
@@ -23,7 +27,6 @@ fi
 
 echo ${LOC} >> allpackagefiles
 
-    echo updated $j $i
    done
  done
 

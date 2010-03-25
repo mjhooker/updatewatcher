@@ -5,7 +5,7 @@ HOST=archive.ubuntu.com
 
 
 rm allpackagefiles
-rm newpackagefiles
+echo existingpackages > newpackagefiles
 
 for i in jaunty jaunty-security jaunty-updates 
  do

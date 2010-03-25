@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 
 open P,"< packages";
+open E,"> existingpackages";
 
 while ($ipline=<P>)
 {
@@ -14,12 +15,15 @@ while ($ipline=<P>)
     $config{$package}{"version"}=$version;
     $config{$package}{"descr"}=$descr;
 
+    print E "Package: ".$package."\n";
+    print E "Version: ".$version."\n\n";
 }
 
+close E;
 close P;
 
 print "computing updates\n";
-open A,"cat `cat allpackagefiles` |";
+open A,"cat `cat newpackagefiles` |";
 
 while ($ipline=<A>)
 {

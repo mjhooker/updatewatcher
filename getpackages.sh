@@ -29,4 +29,4 @@ then
  uuidgen > system.inf
 fi
 
-md5sum packages > packages.md5
+echo ${NEW} > packages.md5

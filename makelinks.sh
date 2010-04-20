@@ -1,22 +1,22 @@
 #/bin/bash
 
 OPT=-nv
-HOST=archive.ubuntu.com
+#HOST=archive.ubuntu.com
 
 
 rm allpackagefiles
 touch updatedpackages
 echo updatedpackages > newpackagefiles
 
-for i in jaunty jaunty-security jaunty-updates 
+for i in `./getrepo.pl` 
  do
-  for j in main multiverse universe restricted 
-   do
+#  for j in main multiverse universe restricted 
+#   do
 
-    echo check for updated $j $i
+    echo check for updated $i
 
 
-    LOC=${HOST}/ubuntu/dists/${i}/${j}/binary-i386/Packages
+    LOC=${i}
 wget $OPT -m http://${LOC}.bz2 
 if [ ${LOC}.bz2 -nt ${LOC} ]
 then
@@ -27,6 +27,6 @@ fi
 
 echo ${LOC} >> allpackagefiles
 
-   done
+#   done
  done
 

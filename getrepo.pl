@@ -26,7 +26,7 @@ while ($ipline=<R>)
 
   for ($x=3;$x<10;$x++)
   {
-   if ($fields[$x] gt "")
+   if (($fields[$x] gt "")&&($fields[0] eq "deb"))
    {
     print $fields[1]."dists/".$fields[2]."/".$fields[$x]."/binary-".$arch."/Packages\n"
    }

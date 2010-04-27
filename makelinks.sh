@@ -13,14 +13,14 @@ for i in `./getrepo.pl`
 #  for j in main multiverse universe restricted 
 #   do
 
-    echo check for updated $i
+#    echo check for updated $i
 
 
     LOC=${i}
 wget $OPT -m http://${LOC}.bz2 
 if [ ${LOC}.bz2 -nt ${LOC} ]
 then
- echo unzippping
+ echo unzippping updated $i
  bzip2 -d < ${LOC}.bz2 > ${LOC}
  echo ${LOC} >> newpackagefiles
 fi

@@ -23,7 +23,7 @@ while ($ipline=<P>)
 close P;
 
 
-print "computing updates\n";
+# print "computing updates\n";
 open A,"cat `cat newpackagefiles` |";
 
 while ($ipline=<A>)

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # dpkg-query -l | grep -v "^rc" > packages
-echo checking installed packages
+# echo checking installed packages
 dpkg-query -W -f '${Status;1}\t${Package}\t${Version}\n' | grep -v "^d" > packages
 gzip < packages > packages.gz
 
@@ -15,8 +15,8 @@ then
  then
   echo installed packages updated
   cp allpackagefiles newpackagefiles
- else
-  echo no change to installed packages
+# else
+#  echo no change to installed packages
  fi
 else
  cp allpackagefiles newpackagefiles

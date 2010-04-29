@@ -28,7 +28,12 @@ while ($ipline=<R>)
   {
    if (($fields[$x] gt "")&&($fields[0] eq "deb"))
    {
-    print $fields[1]."dists/".$fields[2]."/".$fields[$x]."/binary-".$arch."/Packages\n"
+    $dists="dists/";
+    if (substr($fields[1],-1,1) ne "/")
+    {
+     $dists="/".$dists;
+    }
+    print $fields[1].$dists.$fields[2]."/".$fields[$x]."/binary-".$arch."/Packages\n"
    }
   }
 #  print $ipline."\n";

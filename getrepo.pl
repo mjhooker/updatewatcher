@@ -7,6 +7,10 @@ if ($arch eq "i686")
 {
  $arch="i386";
 }
+if ($arch eq "x86_64")
+{
+ $arch="amd64";
+}
 
 
 $hprefix="http://";

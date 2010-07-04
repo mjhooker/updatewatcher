@@ -63,7 +63,18 @@ while ($ipline=<A>)
 close A;
 
 open E,"> updatedpackages";
+open H,"> updatedpackages.html";
+open T,"< template.html";
 
+$template=<T>;
+print H $template;
+
+$template=<T>;
+# print H,$template;
+
+$tpackage="*Package*";
+$tcurrent="*Current*";
+$tnew="*New*";
 
 foreach $i (keys %config)
 {
@@ -73,6 +84,19 @@ foreach $i (keys %config)
     {
         print $i.chr(9).$config{$i}{"version"}." != ";
         print $latestp{$i}."\n";
+
+$output=$template;
+$ppackage=index($template,$tpackage);
+$pnew=index($template,$tnew);
+$pcurrent=index($template,$tcurrent);
+
+$output=substr($output,$pnew,length($tnew))=$latest{$i};
+$output=substr($output,$pcurrent,length($tcurrent))=$config{$i}{"version"};
+$output=substr($output,$ppackage,length($tpackage))=$i;
+
+  print H $output;
+  print $output;
+  
     print E "Package: ".$i."\n";
     print E "Version: ".$latestp{$i}."\n\n";
 
@@ -80,4 +104,10 @@ foreach $i (keys %config)
   }
 }
 
+$template=<T>;
+print H $template;
+
+
 close E;
+close H;
+close T;

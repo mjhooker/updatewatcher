@@ -92,7 +92,7 @@ $pcurrent=index($template,$tcurrent);
 
 
 
-substr($output,$pnew,length($tnew))=$latest{$i};
+substr($output,$pnew,length($tnew))=$latestp{$i};
 substr($output,$pcurrent,length($tcurrent))=$config{$i}{"version"};
 substr($output,$ppackage,length($tpackage))=$i;
 

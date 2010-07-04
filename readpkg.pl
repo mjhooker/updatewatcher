@@ -76,7 +76,7 @@ $tpackage="*Package*";
 $tcurrent="*Current*";
 $tnew="*New*";
 
-foreach $i (keys %config)
+foreach $i (sort (keys %config))
 {
   if (exists $latestp{$i})
   {

@@ -97,7 +97,7 @@ substr($output,$pcurrent,length($tcurrent))=$config{$i}{"version"};
 substr($output,$ppackage,length($tpackage))=$i;
 
   print H $output;
-  print $output;
+#  print $output;
   
     print E "Package: ".$i."\n";
     print E "Version: ".$latestp{$i}."\n\n";

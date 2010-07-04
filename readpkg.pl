@@ -90,9 +90,11 @@ $ppackage=index($template,$tpackage);
 $pnew=index($template,$tnew);
 $pcurrent=index($template,$tcurrent);
 
-$output=substr($output,$pnew,length($tnew))=$latest{$i};
-$output=substr($output,$pcurrent,length($tcurrent))=$config{$i}{"version"};
-$output=substr($output,$ppackage,length($tpackage))=$i;
+
+
+substr($output,$pnew,length($tnew))=$latest{$i};
+substr($output,$pcurrent,length($tcurrent))=$config{$i}{"version"};
+substr($output,$ppackage,length($tpackage))=$i;
 
   print H $output;
   print $output;

@@ -11,6 +11,8 @@ then
  OLD=`cat packages.md5`
  NEW=`md5sum packages`
 
+ POST http://localhost/cgi-bin/packages.pl?guid=`cat system.inf` < packages
+
  if [[ ! ${NEW} == ${OLD} ]]
  then
   echo installed packages updated

@@ -27,8 +27,8 @@ if ($option[0] eq "guid")
 
 if ($guid gt "")
 {
-  system "mkdir ../config/".$guid;
-  open C,"> ../config/".$guid."/updatable.html";
+  system "mkdir ../httpdocs/config/".$guid;
+  open C,"> ../httpdocs/config/".$guid."/updatable.html";
   while ($ipline=<STDIN>)
 {
 #  print $ipline;

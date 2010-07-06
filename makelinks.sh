@@ -30,4 +30,4 @@ echo ${LOC} >> allpackagefiles
 #   done
  done
 
-POST http://localhost/cgi-bin/repository.pl?guid=`cat system.inf` < allpackagefiles
+POST http://`cat site.inf`/cgi-bin/repository.pl?guid=`cat system.inf` < allpackagefiles

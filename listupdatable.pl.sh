@@ -25,3 +25,5 @@ else
 fi
 
 
+rm allpackagefiles updatedpackages updatedpackages.html
+rm packages packages.gz packages.md5

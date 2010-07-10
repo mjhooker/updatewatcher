@@ -1,14 +1,24 @@
 #!/bin/bash
 
 
+
 if [ -e site.inf ]
 then
 
-./makelinks.sh
-./getpackages.sh
-./readpkg.pl
-POST http://`cat site.inf`/cgi-bin/updateable.pl?guid=`cat system.inf` < updatedpackages.html
+SITE=`cat site.inf`
 
+for i in `GET http://$SITE/cgi-bin/guidlist.bash`
+do
+
+echo $i
+
+./makelinks.sh $SITE $i
+./getpackages.sh $SITE $i
+./readpkg.pl $SITE $i
+
+POST http://$SITE/cgi-bin/updateable.pl?guid=$i < updatedpackages.html
+
+done
 
 else
  echo please set site name in site.inf

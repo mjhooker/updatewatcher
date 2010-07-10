@@ -3,12 +3,15 @@
 OPT=-nv
 #HOST=archive.ubuntu.com
 
+SITE=$1
+GUID=$2
 
 rm allpackagefiles
-touch updatedpackages
-echo updatedpackages > newpackagefiles
+touch allpackagefiles
 
-for i in `./getrepo.pl` 
+GET http://$SITE/config/$GUID/repository.txt > allpackagefiles
+
+for i in `cat allpackagefiles` 
  do
 #  for j in main multiverse universe restricted 
 #   do
@@ -22,12 +25,8 @@ if [ ${LOC}.bz2 -nt ${LOC} ]
 then
  echo unzippping updated $i
  bzip2 -d < ${LOC}.bz2 > ${LOC}
- echo ${LOC} >> newpackagefiles
 fi
-
-echo ${LOC} >> allpackagefiles
 
 #   done
  done
 
-POST http://`cat site.inf`/cgi-bin/repository.pl?guid=`cat system.inf` < allpackagefiles

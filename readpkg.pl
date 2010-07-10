@@ -24,7 +24,7 @@ close P;
 
 
 # print "computing updates\n";
-open A,"cat `cat newpackagefiles` |";
+open A,"cat `cat allpackagefiles` |";
 
 while ($ipline=<A>)
 {
@@ -62,7 +62,7 @@ while ($ipline=<A>)
 
 close A;
 
-open E,"> updatedpackages";
+#open E,"> updatedpackages";
 open H,"> updatedpackages.html";
 open T,"< template.html";
 
@@ -99,8 +99,8 @@ substr($output,$ppackage,length($tpackage))=$i;
   print H $output;
 #  print $output;
   
-    print E "Package: ".$i."\n";
-    print E "Version: ".$latestp{$i}."\n\n";
+#    print E "Package: ".$i."\n";
+#    print E "Version: ".$latestp{$i}."\n\n";
 
     }
   }
@@ -110,6 +110,6 @@ $template=<T>;
 print H $template;
 
 
-close E;
+#close E;
 close H;
 close T;

@@ -16,7 +16,7 @@ echo $i
 ./getpackages.sh $SITE $i
 ./readpkg.pl $SITE $i
 
-POST http://$SITE/cgi-bin/updateable.pl?guid=$i < updatedpackages.html
+POST http://$SITE/cgi-bin/updateable.pl?guid=$i < updatedpackages.html > /dev/null
 
 done
 

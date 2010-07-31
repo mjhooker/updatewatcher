@@ -91,9 +91,9 @@ while ($ipline=<STDIN>)
   }
   if ($linevalid)
   {
-    print "valid\n";
+    print "valid a $fields[$nfields-2] d $fields[$nfields-4] s $fields[$nfields-3] $ipline \n";
     # arch dist section
-    $repo{$fields[$nfields-1]}{$fields[$nfields-3]}{$fields[$nfields-2]}=$ipline;
+    $repo{$fields[$nfields-2]}{$fields[$nfields-4]}{$fields[$nfields-3]}=$ipline;
   } else {
     print "invalid\n";
   }
@@ -101,10 +101,13 @@ while ($ipline=<STDIN>)
 
 foreach $arch (keys %repo)
 {
-  foreach $dist (keys %repo{$arch})
+#  print "a:".$arch."\n";
+  foreach $dist (sort keys %{%repo->{$arch}})
   {
-    foreach $section (keys %repo{$arch}{$dist})
+#  print "d:".$dist."\n";
+    foreach $section (sort keys %{%repo->{$arch}->{$dist}})
     {
+#  print "s:".$section."\n";
       print $arch.chr(9).$dist.chr(9).$section."\n";
     }
   }

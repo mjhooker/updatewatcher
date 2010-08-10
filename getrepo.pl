@@ -46,20 +46,3 @@ while ($ipline=<R>)
 
 close R;
 
-#deb http://archive.ubuntu.com/ubuntu/ jaunty main universe restricted multiverse
-#deb http://security.ubuntu.com/ubuntu/ jaunty-security universe main multiverse restricted
-#deb http://archive.ubuntu.com/ubuntu/ jaunty-updates universe main multiverse restricted
-
-
-#archive.ubuntu.com/ubuntu/dists/jaunty/main/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty/multiverse/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty/universe/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty/restricted/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty-security/main/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty-security/multiverse/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty-security/universe/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty-security/restricted/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty-updates/main/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty-updates/multiverse/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty-updates/universe/binary-i386/Packages
-#archive.ubuntu.com/ubuntu/dists/jaunty-updates/restricted/binary-i386/Packages

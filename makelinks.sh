@@ -9,7 +9,7 @@ GUID=$2
 rm allpackagefiles
 touch allpackagefiles
 
-GET http://$SITE/config/$GUID/repository.txt > allpackagefiles
+GET http://$SITE/config/$GUID/repository.txt | sed s/ubuntu\-ports\\\/// | sed s/binary\-ppc/binary\-powerpc/ > allpackagefiles
 
 for i in `cat allpackagefiles` 
  do

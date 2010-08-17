@@ -25,9 +25,4 @@ then
  fi
 fi
 
-if [ ! -e system.inf ]
-then
- echo generating guid
- uuidgen > system.inf
-fi
 

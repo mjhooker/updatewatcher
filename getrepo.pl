@@ -11,6 +11,10 @@ if ($arch eq "x86_64")
 {
  $arch="amd64";
 }
+if ($arch eq "ppc")
+{
+ $arch="powerpc";
+}
 
 
 $hprefix="http://";

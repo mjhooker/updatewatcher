@@ -10,7 +10,7 @@ SITE=`cat site.inf`
 for i in `GET http://$SITE/cgi-bin/guidlist.bash`
 do
 
-echo $i
+#echo $i
 
 ./makelinks.sh $SITE $i
 ./getpackages.sh $SITE $i
@@ -25,5 +25,5 @@ else
 fi
 
 
-rm allpackagefiles updatedpackages updatedpackages.html
-rm packages packages.gz packages.md5
+rm allpackagefiles updatedpackages.html
+rm packages

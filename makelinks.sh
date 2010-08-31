@@ -6,7 +6,10 @@ OPT=-nv
 SITE=$1
 GUID=$2
 
-rm allpackagefiles
+if [ -e allpackagefiles ]
+then
+	rm allpackagefiles
+fi
 touch allpackagefiles
 
 GET http://$SITE/config/$GUID/repository.txt | sed s/ubuntu\-ports\\\/// | sed s/binary\-ppc/binary\-powerpc/ > allpackagefiles

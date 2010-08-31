@@ -14,4 +14,4 @@ for i in `./getrepo.pl`
 #   done
  done
 
-POST http://`cat site.inf`/cgi-bin/repository.pl?guid=`cat system.inf` < allpackagefiles
+POST -d http://`cat site.inf`/cgi-bin/repository.pl?guid=`cat system.inf` < allpackagefiles

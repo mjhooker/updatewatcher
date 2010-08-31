@@ -18,7 +18,7 @@ then
  then
   echo installed packages updated
 
-  POST http://`cat site.inf`/cgi-bin/packages.pl?guid=`cat system.inf` < packages
+  POST -d http://`cat site.inf`/cgi-bin/packages.pl?guid=`cat system.inf` < packages
 
 # else
 #  echo no change to installed packages

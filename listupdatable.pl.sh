@@ -20,8 +20,8 @@ then
 
 ./makelinks.sh
 ./getpackages.sh
-POST http://`cat site.inf`/cgi-bin/machine.pl?guid=`cat system.inf` < machine.inf
-POST http://`cat site.inf`/cgi-bin/account.pl?guid=`cat system.inf` < account.inf
+POST -d http://`cat site.inf`/cgi-bin/machine.pl?guid=`cat system.inf` < machine.inf
+POST -d http://`cat site.inf`/cgi-bin/account.pl?guid=`cat system.inf` < account.inf
 
 
 

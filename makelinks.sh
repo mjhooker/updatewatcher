@@ -24,6 +24,7 @@ wget $OPT -m http://${LOC}.bz2
 if [ ${LOC}.bz2 -nt ${LOC} ]
 then
  echo unzippping updated $i
+ touch ${LOC}
  bzip2 -d < ${LOC}.bz2 > ${LOC}
 fi
 

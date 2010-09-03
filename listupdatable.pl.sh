@@ -14,7 +14,7 @@ do
 
 ./makelinks.sh $SITE $i
 ./getpackages.sh $SITE $i
-./readpkg.pl`
+./readpkg.pl
 
 POST http://$SITE/cgi-bin/updateable.pl?guid=$i < updatedpackages.html > /dev/null
 

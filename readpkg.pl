@@ -67,6 +67,14 @@ open H,"> updatedpackages.html";
 open T,"< template.html";
 
 $template=<T>;
+$machine=`cat machine.txt`;
+
+$ttitle="*title*";
+$ptitle=index($template,$ttitle);
+
+substr($template,$ptitle,length($ttitle)))=$machine;
+
+
 print H $template;
 
 $template=<T>;

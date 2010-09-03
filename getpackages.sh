@@ -11,4 +11,5 @@ fi
 touch packages
 
 GET http://$1/config/$2/packages.txt > packages
+GET http://$1/config/$2/machine.txt > machine.txt
 

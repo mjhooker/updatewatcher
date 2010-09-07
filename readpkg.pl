@@ -29,7 +29,16 @@ open A,"cat `cat allpackagefiles` |";
 while ($ipline=<A>)
 {
   @fields=split(/\t/,$ipline);
-  $latestp{$fields[0]}=$fields[1];
+  if (exists $latestp{$fields[0]})
+  {
+    $compare=system("dpkg --compare-versions ".$latestp{$fields[0]}." lt ".$fields[1]);
+    if ($compare==0)
+    {
+      $latestp{$fields[0]}=$fields[1];
+    }
+  } else {
+    $latestp{$fields[0]}=$fields[1];
+  }
 }
 
 close A;

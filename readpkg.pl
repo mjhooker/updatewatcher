@@ -29,6 +29,11 @@ open A,"cat `cat allpackagefiles` |";
 while ($ipline=<A>)
 {
   @fields=split(/\t/,$ipline);
+
+  if (exists $config{$fields[0]})
+{
+  # if the package is not installed then don't bother checking it or storing details of it
+
   if (exists $latestp{$fields[0]})
   {
     $compare=system("dpkg --compare-versions ".$latestp{$fields[0]}." lt ".$fields[1]);
@@ -39,6 +44,8 @@ while ($ipline=<A>)
   } else {
     $latestp{$fields[0]}=$fields[1];
   }
+}
+
 }
 
 close A;

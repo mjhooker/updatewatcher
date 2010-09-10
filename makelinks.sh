@@ -28,7 +28,7 @@ if [ ${LOC}.bz2 -nt ${LOC} ]
 then
  echo unzippping updated $i
  touch ${LOC}
- bzip2 -d < ${LOC}.bz2 | ./extractpackages.pl > ${LOC}
+ bzip2 -d < ${LOC}.bz2 | ./extractpackages.pl ${LOC} > ${LOC}
 fi
 
 #   done

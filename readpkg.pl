@@ -1,5 +1,17 @@
 #!/usr/bin/perl
 
+
+use strict;
+use warnings;
+use DB_File;
+use POSIX;
+
+my $ipline;
+my @fields;
+my $package;
+my $version;
+my %config;
+
 open P,"< packages";
 #open E,"> existingpackages";
 
@@ -13,7 +25,7 @@ while ($ipline=<P>)
     $version=$fields[2];
 
     $config{$package}{"version"}=$version;
-    $config{$package}{"descr"}=$descr;
+#    $config{$package}{"descr"}=$descr;
 
 #    print E "Package: ".$package."\n";
 #    print E "Version: ".$version."\n\n";
@@ -22,30 +34,35 @@ while ($ipline=<P>)
 #close E;
 close P;
 
+my %readpkg;
+my $i;
+my $compare;
+my %latestp;
 
 # print "computing updates\n";
-open A,"cat `cat allpackagefiles` |";
+open A,"< allpackagefiles";
 
 while ($ipline=<A>)
 {
-  @fields=split(/\t/,$ipline);
+  chomp ($ipline);
+  tie (%readpkg, 'DB_File', $ipline.".db", O_RDONLY, 0);
 
-  if (exists $config{$fields[0]})
-{
-  # if the package is not installed then don't bother checking it or storing details of it
-
-  if (exists $latestp{$fields[0]})
+  foreach $i (keys %config)
   {
-    $compare=system("dpkg --compare-versions ".$latestp{$fields[0]}." lt ".$fields[1]);
-    if ($compare==0)
+    if (defined $readpkg{$i})
     {
-      $latestp{$fields[0]}=$fields[1];
+      if (!exists $latestp{$i})
+      {
+        $latestp{$i}=$config{$i}{"version"};
+      }
+      $compare=system("dpkg --compare-versions ".$latestp{$i}." lt ".$readpkg{$i});
+      if ($compare==0)
+      {
+        $latestp{$i}=$readpkg{$i};
+      }
     }
-  } else {
-    $latestp{$fields[0]}=$fields[1];
   }
-}
-
+  untie %readpkg;
 }
 
 close A;
@@ -54,11 +71,11 @@ close A;
 open H,"> updatedpackages.html";
 open T,"< template.html";
 
-$template=<T>;
-$machine=`cat machine.txt`;
+my $template=<T>;
+my $machine=`cat machine.txt`;
 
-$ttitle="*title*";
-$ptitle=index($template,$ttitle);
+my $ttitle="*title*";
+my $ptitle=index($template,$ttitle);
 
 substr($template,$ptitle,length($ttitle))=$machine;
 
@@ -68,9 +85,9 @@ print H $template;
 $template=<T>;
 # print H,$template;
 
-$tpackage="*Package*";
-$tcurrent="*Current*";
-$tnew="*New*";
+my $tpackage="*Package*";
+my $tcurrent="*Current*";
+my $tnew="*New*";
 
 foreach $i (sort (keys %config))
 {
@@ -81,10 +98,10 @@ foreach $i (sort (keys %config))
 #        print $i.chr(9).$config{$i}{"version"}." != ";
 #        print $latestp{$i}."\n";
 
-$output=$template;
-$ppackage=index($template,$tpackage);
-$pnew=index($template,$tnew);
-$pcurrent=index($template,$tcurrent);
+my $output=$template;
+my $ppackage=index($template,$tpackage);
+my $pnew=index($template,$tnew);
+my $pcurrent=index($template,$tcurrent);
 
 
 

@@ -1,6 +1,29 @@
 #!/usr/bin/perl
 
 
+my $file;
+
+$file=$ARGV[0];
+
+use warnings;
+use strict;
+use POSIX;
+use DB_File;
+
+my %packages;
+
+tie %packages,'DB_File', $file.".db",O_CREAT|O_RDWR,0644;
+
+undef %packages;
+
+my $ipline;
+my $want;
+my %latestp;
+my $foundversion;
+my $foundpackage;
+my $i;
+my $compare;
+
 while ($ipline=<STDIN>)
 {
 #  print $ipline;
@@ -37,5 +60,6 @@ while ($ipline=<STDIN>)
 
 foreach $i (keys %latestp)
 {
+  $packages{$i}=$latestp{$i};
   print $i.chr(9).$latestp{$i}.chr(9)."\n";
 }

@@ -58,8 +58,14 @@ while ($ipline=<STDIN>)
 
 }
 
+my $npackages=0;
+
 foreach $i (keys %latestp)
 {
   $packages{$i}=$latestp{$i};
   print $i.chr(9).$latestp{$i}.chr(9)."\n";
+  $npackages+=1;
 }
+$packages{"num.packages"}=$npackages;
+
+untie %packages;

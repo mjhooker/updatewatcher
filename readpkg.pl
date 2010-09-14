@@ -15,6 +15,8 @@ my %config;
 open P,"< packages";
 #open E,"> existingpackages";
 
+my $ipackages=0;
+
 while ($ipline=<P>)
 {
 #  print $ipline;
@@ -25,6 +27,7 @@ while ($ipline=<P>)
     $version=$fields[2];
 
     $config{$package}{"version"}=$version;
+    $ipackages+=1;
 #    $config{$package}{"descr"}=$descr;
 
 #    print E "Package: ".$package."\n";
@@ -42,23 +45,50 @@ my %latestp;
 # print "computing updates\n";
 open A,"< allpackagefiles";
 
+my $npackages=0;
+
 while ($ipline=<A>)
 {
   chomp ($ipline);
   tie (%readpkg, 'DB_File', $ipline.".db", O_RDONLY, 0);
+  $npackages=$readpkg{"num.packages"};
 
-  foreach $i (keys %config)
+'  print $ipackages.chr(9).$npackages.chr(9);
+  if ($ipackages<$npackages)
   {
-    if (defined $readpkg{$i})
+'    print "[".$ipackages."]\n";
+    
+    foreach $i (keys %config)
     {
-      if (!exists $latestp{$i})
+      if (defined $readpkg{$i})
       {
-        $latestp{$i}=$config{$i}{"version"};
+        if (!exists $latestp{$i})
+        {
+          $latestp{$i}=$config{$i}{"version"};
+        }
+        $compare=system("dpkg --compare-versions ".$latestp{$i}." lt ".$readpkg{$i});
+        if ($compare==0)
+        {
+          $latestp{$i}=$readpkg{$i};
+        }
       }
-      $compare=system("dpkg --compare-versions ".$latestp{$i}." lt ".$readpkg{$i});
-      if ($compare==0)
+    }
+  } else {
+'    print "[".$npackages."]\n";
+    foreach $i (keys %readpkg)
+    {
+
+      if (exists $config{$i})
       {
-        $latestp{$i}=$readpkg{$i};
+        if (!exists $latestp{$i})
+        {
+          $latestp{$i}=$config{$i}{"version"};
+        }
+        $compare=system("dpkg --compare-versions ".$latestp{$i}." lt ".$readpkg{$i});
+        if ($compare==0)
+        {
+          $latestp{$i}=$readpkg{$i};
+        }
       }
     }
   }

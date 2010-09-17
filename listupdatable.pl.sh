@@ -2,6 +2,8 @@
 
 source siteinf.sh
 
+GUID=\?guid=${MGUID}
+
 echo ${MACH} | POST -d ${ADDR}machine.pl${GUID}
 echo ${ACC} | POST -d ${ADDR}account.pl${GUID}
 

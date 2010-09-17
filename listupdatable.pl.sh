@@ -17,11 +17,38 @@ then
 if [ -e account.inf ]
 then
 
+ADDR=http://`cat site.inf`/cgi-bin/
+GUID=\?guid=`cat system.inf`
 
-./makelinks.sh
-./getpackages.sh
-POST -d http://`cat site.inf`/cgi-bin/machine.pl?guid=`cat system.inf` < machine.inf
-POST -d http://`cat site.inf`/cgi-bin/account.pl?guid=`cat system.inf` < account.inf
+
+# ./makelinks.sh
+
+( for i in `./getrepo.pl` 
+ do
+    echo ${i} 
+ done ) | POST -d ${ADDR}repository.pl${GUID}
+
+# ./getpackages.sh
+
+dpkg-query -W -f '${Status;1}\t${Package}\t${Version}\n' | grep -v "^d" > packages
+
+OLD=`cat packages.md5`
+NEW=`md5sum packages`
+echo "${NEW}" > packages.md5
+
+
+
+ if [[ ! ${NEW} == ${OLD} ]]
+ then
+ # installed packages updated
+
+  POST -d ${ADDR}packages.pl${GUID} < packages
+
+ fi
+
+
+POST -d ${ADDR}machine.pl${GUID} < machine.inf
+POST -d ${ADDR}account.pl${GUID} < account.inf
 
 
 

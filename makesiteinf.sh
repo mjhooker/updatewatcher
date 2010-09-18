@@ -13,5 +13,5 @@ echo ACC=${ACC} >> siteinf.sh
 echo MGUID=${MGUID} >> siteinf.sh
 echo SITE=${SITE} >> siteinf.sh
 echo ADDR=http://\$\{SITE\}/cgi-bin/ >> siteinf.sh
-echo GUID=\\\?guid=\$\{MGUID\} >> siteinf.sh
+#echo GUID=\\\?guid=\$\{MGUID\} >> siteinf.sh
 

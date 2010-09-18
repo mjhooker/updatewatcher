@@ -1,9 +1,11 @@
 #!/bin/bash
 
-if [ -e siteinf.sh ]
+CONFIG=siteinf.sh
+
+if [ -e $CONFIG ]
 then
 
-source siteinf.sh
+source $CONFIG
 
 echo ${MACH} | POST -d ${ADDR}machine.pl${GUID}
 echo ${ACC} | POST -d ${ADDR}account.pl${GUID}
@@ -21,5 +23,5 @@ echo ${ACC} | POST -d ${ADDR}account.pl${GUID}
 dpkg-query -W -f '${Status;1}\t${Package}\t${Version}\n' | grep -v "^d" | POST -d ${ADDR}packages.pl${GUID}
 
 else
- echo needs siteif.sh file
+ echo needs $CONFIG file
 fi

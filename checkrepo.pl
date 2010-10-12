@@ -64,28 +64,34 @@ while ($ipline=<STDIN>)
 #  print $ipline."\n";
   @fields=split(/\//,$ipline);
   $nfields=@fields;
-  for ($x=0;$x<$nfields;$x++)
+  if ($nfields<6)
   {
+    $linevalid=0;
+  } else {
+
+    for ($x=0;$x<$nfields;$x++)
+    {
 #    print $x.chr(9).$fields[$x]."\n";
-    if ($x==0)
-    {
-      if (!issite($fields[$x]))
+      if ($x==0)
       {
-        $linevalid=0;
+        if (!issite($fields[$x]))
+        {
+          $linevalid=0;
+        }
       }
-    }
-    if (($x>0)&&($x<($nfields-1)))
-    {
-      if (!iscomp($fields[$x]))
+      if (($x>0)&&($x<($nfields-1)))
       {
-        $linevalid=0;
+        if (!iscomp($fields[$x]))
+        {
+          $linevalid=0;
+        }
       }
-    }
-    if ($x==$nfields)
-    {
-      if ($fields[$x] ne "Packages")
+      if ($x==$nfields)
       {
-        $linevalid=0;
+        if ($fields[$x] ne "Packages")
+        {
+          $linevalid=0;
+        }
       }
     }
   }
@@ -93,7 +99,7 @@ while ($ipline=<STDIN>)
   {
 #    print "valid a $fields[$nfields-2] d $fields[$nfields-4] s $fields[$nfields-3] $ipline \n";
     # arch dist section
-    $repo{$fields[$nfields-2]}{$fields[$nfields-4]}{$fields[$nfields-3]}=$ipline;
+  $repo{$fields[$nfields-2]}{$fields[$nfields-4]}{$fields[$nfields-3]}=$ipline;
   } else {
     print "invalid\n";
     exit 1;

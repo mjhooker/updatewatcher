@@ -18,9 +18,10 @@ touch allpackagefiles
 GET http://$SITE/config/$GUID/repository.txt > allpackagefiles
 
 
-if [ ./checkrepo.pl < allpackagefiles ]
+if  ./checkrepo.pl < allpackagefiles
 then
-
+ echo good packages
+ 
 for i in `cat allpackagefiles` 
  do
 #  for j in main multiverse universe restricted 

@@ -100,6 +100,19 @@ while ($ipline=<STDIN>)
   }
 }
 
+open H,"> repo.html";
+open T,"< repo_template.html";
+
+$template=<T>;
+print H $template;
+$template=<T>;
+
+$tarch="*arch*";
+$tdist="*dist*";
+$tsection="*section*";
+$trepo="*repo*";
+
+
 foreach $arch (keys %repo)
 {
 #  print "a:".$arch."\n";
@@ -109,8 +122,42 @@ foreach $arch (keys %repo)
     foreach $section (sort keys %{%repo->{$arch}->{$dist}})
     {
 #  print "s:".$section."\n";
-      print $arch.chr(9).$dist.chr(9).$section.chr(9).$repo{$arch}{$dist}{$section}."\n";
+#      print $arch.chr(9).$dist.chr(9).$section.chr(9).$repo{$arch}{$dist}{$section}."\n";
+
+$output=$template;
+$psection=index($template,$tsection);
+$pdist=index($template,$tdist);
+$parch=index($template,$tarch);
+$prepo=index($template,$trepo);
+
+substr($output,$psection,length($tsection))=$section;
+substr($output,$pdist,length($tdist))=$dist;
+substr($output,$parch,length($tarch))=$arch;
+
+@fields=split(/\//,$repo{$arch}{$dist}{$section});
+
+substr($output,$prepo,length($trepo))=$fields[0];
+
+print H $output;
+
     }
   }
 }
+
+
+
+
+
+
+
+
+$template=<T>;
+print H $template;
+
+
+#close E;
+close H;
+close T;
+
 exit 0;
+

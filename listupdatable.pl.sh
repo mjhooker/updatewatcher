@@ -17,6 +17,8 @@ do
 ./readpkg.pl
 
 POST http://$SITE/cgi-bin/updateable.pl?guid=$i < updatedpackages.html > /dev/null
+POST http://$SITE/cgi-bin/repo.pl?guid=$i < repo.html > /dev/null
+
 
 done
 

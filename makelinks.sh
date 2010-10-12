@@ -12,7 +12,14 @@ then
 fi
 touch allpackagefiles
 
-GET http://$SITE/config/$GUID/repository.txt | sed s/ubuntu\-ports\\\/// | sed s/binary\-ppc/binary\-powerpc/ > allpackagefiles
+# remove temporary kludge
+#GET http://$SITE/config/$GUID/repository.txt | sed s/ubuntu\-ports\\\/// | sed s/binary\-ppc/binary\-powerpc/ > allpackagefiles
+
+GET http://$SITE/config/$GUID/repository.txt > allpackagefiles
+
+
+if [ ./checkrepo.pl < allpackagefiles ]
+then
 
 for i in `cat allpackagefiles` 
  do
@@ -34,3 +41,6 @@ fi
 #   done
  done
 
+else
+ echo bad package directory
+fi

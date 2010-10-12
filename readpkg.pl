@@ -85,14 +85,12 @@ $output=$template;
 $ppackage=index($template,$tpackage);
 $pnew=index($template,$tnew);
 $pcurrent=index($template,$tcurrent);
-
-
-
 substr($output,$pnew,length($tnew))=$latestp{$i};
 substr($output,$pcurrent,length($tcurrent))=$config{$i}{"version"};
 substr($output,$ppackage,length($tpackage))=$i;
 
-  print H $output;
+print H $output;
+
 #  print $output;
   
 #    print E "Package: ".$i."\n";

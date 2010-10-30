@@ -20,7 +20,7 @@ GET http://$SITE/config/$GUID/repository.txt > allpackagefiles
 
 if  ./checkrepo.pl < allpackagefiles
 then
- echo good packages
+# echo good packages
  
 for i in `cat allpackagefiles` 
  do

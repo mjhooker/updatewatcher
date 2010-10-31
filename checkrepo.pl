@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+require "tempinsert.pl" or die "can't load tempinsert.pl";
+
 $chars="abcdefghijklmnopqrstuvwxyz";
 $numbers="01234567890";
 $others="-";
@@ -113,10 +115,10 @@ $template=<T>;
 print H $template;
 $template=<T>;
 
-$tarch="*arch*";
-$tdist="*dist*";
-$tsection="*section*";
-$trepo="*repo*";
+$tarch="arch";
+$tdist="dist";
+$tsection="section";
+$trepo="repo";
 
 
 foreach $arch (keys %repo)
@@ -131,31 +133,24 @@ foreach $arch (keys %repo)
 #      print $arch.chr(9).$dist.chr(9).$section.chr(9).$repo{$arch}{$dist}{$section}."\n";
 
 $output=$template;
-$psection=index($template,$tsection);
-$pdist=index($template,$tdist);
-$parch=index($template,$tarch);
-$prepo=index($template,$trepo);
 
-substr($output,$psection,length($tsection))=$section;
-substr($output,$pdist,length($tdist))=$dist;
-substr($output,$parch,length($tarch))=$arch;
+$output=tempinsert($output,$tsection,$section);
+$output=tempinsert($output,$tdist,$dist);
+$output=tempinsert($output,$tarch,$arch);
 
 @fields=split(/\//,$repo{$arch}{$dist}{$section});
 
-substr($output,$prepo,length($trepo))=$fields[0];
+$output=tempinsert($output,$trepo,$fields[0]);
+
+$output=tempinsert($output,$trepo,$fields[0]);
+
+$output=tempinsert($output,"lastchanged",`stat -c%z $repo{$arch}{$dist}{$section}`);
 
 print H $output;
 
     }
   }
 }
-
-
-
-
-
-
-
 
 $template=<T>;
 print H $template;

@@ -27,7 +27,7 @@ if ($option[0] eq "guid")
 
 if ($guid gt "")
 {
-  system "stat -c%Z ../httpdocs/config/".$guid."/packages.txt";
+  system "stat -c%Z ../httpdocs/config/".$guid."/updatable.html";
 }
 
 #print "ENV\r\n";

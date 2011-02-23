@@ -31,17 +31,22 @@ for i in `cat allpackagefiles`
 
 
     LOC=${i}
+if ! ./recentlychecked.pl ${LOC}
+then
 wget $OPT -m http://${LOC}.bz2 
+
 if [ ${LOC}.bz2 -nt ${LOC} ]
 then
  echo unzippping updated $i
  touch ${LOC}
  bzip2 -d < ${LOC}.bz2 | ./extractpackages.pl > ${LOC}
 fi
+fi
 
 #   done
  done
-
+# run again to get new updated dates
+ ./checkrepo.pl < allpackagefiles
 else
  echo bad package directory
 fi

@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+$latestrepoupdate=0;
+
 require "tempinsert.pl" or die "can't load tempinsert.pl";
 
 $chars="abcdefghijklmnopqrstuvwxyz";
@@ -145,6 +147,11 @@ $output=tempinsert($output,$trepo,$fields[0]);
 $output=tempinsert($output,$trepo,$fields[0]);
 
 $output=tempinsert($output,"lastchanged",`stat -c%z $repo{$arch}{$dist}{$section}`);
+$thisupdate=`stat -c%Z $repo{$arch}{$dist}{$section}`+0;
+if ($thisupdate>$latestrepoupdate)
+{
+  $latestrepoupdate=$thisupdate;
+}
 
 print H $output;
 
@@ -159,5 +166,9 @@ print H $template;
 #close E;
 close H;
 close T;
+
+open L,"> latest_date";
+print L $latestrepoupdate;
+close L;
 
 exit 0;

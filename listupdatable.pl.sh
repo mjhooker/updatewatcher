@@ -33,7 +33,9 @@ else
  read -p "enter machine name:" -e MACH
  read -p "enter account email address:" -e ACC
 
- echo "MGUID=$MGUID" > siteinf.sh
+
+ echo "#!/bin/bash" > siteinf.sh
+ echo "MGUID=$MGUID" >> siteinf.sh
  echo "ADDR=${ADDR}" >> siteinf.sh
  echo "MACH=\"$MACH\"" >> siteinf.sh
  echo "ACC=${ACC}" >> siteinf.sh 

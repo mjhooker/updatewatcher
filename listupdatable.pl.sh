@@ -27,7 +27,7 @@ dpkg-query -W -f '${Status;1}\t${Package}\t${Version}\n' | grep -v "^d" | POST -
 else
  echo needs $CONFIG file
  read -p "enter site name:" -e SITE
- ADDR=https://${SITE}/cgi-bin
+ ADDR=https://${SITE}/cgi-bin/
  MGUID=`GET ${ADDR}/newguid.pl`
  echo guid is $MGUID
  read -p "enter machine name:" -e MACH

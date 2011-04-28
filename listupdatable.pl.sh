@@ -42,5 +42,5 @@ else
  echo please set site name in site.inf
 fi
 
-rm allpackagefiles
-rm packages
+rm -f allpackagefiles packages
+

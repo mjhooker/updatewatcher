@@ -72,6 +72,8 @@ $tpackage="*Package*";
 $tcurrent="*Current*";
 $tnew="*New*";
 
+$pkgcount=0;
+
 foreach $i (sort (keys %config))
 {
   if (exists $latestp{$i})
@@ -81,6 +83,7 @@ foreach $i (sort (keys %config))
 #        print $i.chr(9).$config{$i}{"version"}." != ";
 #        print $latestp{$i}."\n";
 
+$pkgcount+=1;
 $output=$template;
 $ppackage=index($template,$tpackage);
 $pnew=index($template,$tnew);
@@ -101,8 +104,11 @@ print H $output;
 }
 
 $template=<T>;
-print H $template;
 
+$pcount=index($template,"*number*");
+substr($template,$pcount,length("*number*"))=$pkgcount;
+
+print H $template;
 
 #close E;
 close H;

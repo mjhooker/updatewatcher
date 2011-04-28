@@ -10,7 +10,7 @@ SITE=`cat site.inf`
 for i in `GET https://$SITE/cgi-bin/guidlist.bash`
 do
 
-#echo $i
+#echo checking $i
 
 ./makelinks.sh $SITE $i
 
@@ -20,6 +20,7 @@ GET https://$SITE/cgi-bin/packages_date.pl?guid=$i > packages_date
 GET https://$SITE/cgi-bin/updatable_date.pl?guid=$i > updatable_date
 
 if [ `cat packages_date` -ge `cat updatable_date` ] || [ `cat latest_date` -ge `cat updatable_date` ]
+
 
 then
 

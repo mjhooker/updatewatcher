@@ -33,6 +33,8 @@ for i in `cat allpackagefiles`
     LOC=${i}
 if ! ./recentlychecked.pl ${LOC}
 then
+echo not recently checked ${LOC}
+
 wget $OPT -m http://${LOC}.bz2 
 
 if [ ${LOC}.bz2 -nt ${LOC} ]
